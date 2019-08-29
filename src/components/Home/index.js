@@ -6,6 +6,7 @@ import { URL_HOME } from '../Utils/paths';
 import SliderWidget from '../Utils/Slider';
 import Subscriptions from '../Utils/Subscribe';
 import Blocks from './Blocks';
+import Poll from './Poll';
 
 class Home extends Component {
 
@@ -27,6 +28,7 @@ class Home extends Component {
                 <SliderWidget slides={home.slider}/>
                 <Subscriptions />
                 <Blocks blocks={home.blocks}/>
+                <Poll />
             </>
         )
     }
