@@ -13,13 +13,6 @@ class Subscriptions extends Component {
         alreadyIn: false
     }
 
-    // componentDidMount() {
-    //     axios.get(URL_SUB).then(response => {
-    //         console.log(response.data)
-    //         this.setState({ subscriptions: response.data})
-    //     })
-    // }
-
     clearMessages = () => {
         setTimeout(() => {
             this.setState({
@@ -30,13 +23,38 @@ class Subscriptions extends Component {
         }, 3000)
     }
 
+    saveSubscription = (email) => {
+        axios.get(`${URL_SUB}?email=${email}`).then(response => {
+            if(!response.data.length) {
+                axios(URL_SUB, {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    data: JSON.stringify({email})
+                }).then(response => {
+                    this.setState({
+                        email: '',
+                        success: true
+                    })
+                })
+            } else {
+                this.setState({
+                    email:'',
+                    alreadyIn: true
+                })
+            }
+        })
+    }
+
     handleSubmit = (event) => {
         event.preventDefault();
         let email = this.state.email;
         let regex = /\S+@\S+\.\S+/;
 
         if(regex.test(email)) {
-            //subscribe user
+            this.saveSubscription(email);
         } else {
             this.setState({error: true})
         }

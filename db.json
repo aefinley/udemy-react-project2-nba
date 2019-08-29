@@ -86,7 +86,14 @@
     ]
   },
   "subscriptions": [
-    
+    {
+      "email": "francis@gmail.com",
+      "id": 1
+    },
+    {
+      "email": "steve@gmail.com",
+      "id": 2
+    }
   ],
   "teams": [
     {
