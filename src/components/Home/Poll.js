@@ -19,12 +19,26 @@ class Poll extends Component {
         this.getPoll()
     }
 
+    addCount(count, id) {
+        axios(`${URL_TEAMS}/${id}`, {
+            method: 'PATCH',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            data: JSON.stringify({count: count + 1 })
+        }).then(() => {
+            this.getPoll()
+        })
+    }
+
     renderPoll() {
         const position = ['1ST', '2ND', '3RD'];
         return this.state.pollTeams.map((item, index) => (
             <div 
                 key={index}
                 className="poll_item"
+                onClick={ () => this.addCount(item.count, item.id)}
             >
                 <img alt={item.team} src={`/images/teams/${item.logo}`}/>
                 <h4>{position[index]}</h4>
